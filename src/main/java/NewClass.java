@@ -1,3 +1,6 @@
+
+import java.math.BigDecimal;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,12 +11,28 @@
  *
  * @author jansk
  */
+
+
 /** Represents a photo or an image of an item for sale */
 public class Photo {}
 /** An item to be sold in the Fant webstore */
-public class Item {}
+public class Item {
+    @JsonbProperty("itemid")
+    private String title;
+    private String description;
+    private BigDecimal price;
+    private FormDataMultiPart photos;
+    @JsonbProperty("FormDataMultiPart photos")
+}
 /** Represents an user in the Fant webstore */
-public class User {}
+public class User {
+    @NotNull(message="Name cannot be null")
+    private String name;
+    
+    @Email(message="Email should be valid")
+    private String email;
+    
+}
 /** REST service class to be used by the UI */
 public class FantService {
 /**
@@ -81,7 +100,15 @@ public Response delete(Long itemid) {
  *
  * @return the image in original format or in jpeg if scaled
  */
- public Response getPhoto(String name, int width) {}
+ public Response getPhoto(String name, int width) {
+    @GET
+    @Consumes (MediaType.APPLICATION_JSON)
+    @PRODUCES (MediaType.APPLICATION_JSON)
+    public Response findPhoto(Photo photo) {
+        photo = itemRepository.findPhoto(photo)
+        return Response.ok(photo).build();
+    }
+ }
 }
 /** REST service class used for authentication */
 public class AuthenticationService {
