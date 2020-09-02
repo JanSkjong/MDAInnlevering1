@@ -1,5 +1,7 @@
 
+import java.awt.PageAttributes.MediaType;
 import java.math.BigDecimal;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -112,10 +114,21 @@ public Response delete(Long itemid) {
 }
 /** REST service class used for authentication */
 public class AuthenticationService {
- public Response login(String userid, String password) {} // Login user
+ public Response login(String userid, String password) {
+    String userid = request.getParameter("user");
+    String password = request.get Parameter("password");
+    try{
+        request.login(userid, password);
+    }
+    catch (ServletException ex) {
+        return;
+    }
+ } // Login user
  public Response createUser(String userid, String password) {} // Create new user
  public User getCurrentUser() {} // Get information about current user
  /** Change password of current user or any user if current user has the role of
  administrator */
- public Response changePassword(String userid, String password) {}
+ public Response changePassword(String userid, String password) {
+     
+ }
 }
